@@ -1,0 +1,298 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanderlust - Traveler Reservations</title>
+    <style>
+        /* --- CSS STYLES --- */
+        :root {
+            --primary-color: #0077b6;
+            --secondary-color: #00b4d8;
+            --accent-color: #ffb703;
+            --dark-color: #1d3557;
+            --light-color: #f8f9fa;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-color);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header / Navbar */
+        header {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+        }
+
+        /* Container & Reservation Form */
+        .container {
+            max-width: 900px;
+            margin: -60px auto 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            position: relative;
+            z-index: 10;
+        }
+
+        .form-title {
+            text-align: center;
+            margin-bottom: 25px;
+            color: var(--dark-color);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, 
+        .form-group select:focus, 
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .btn-submit {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: #005f87;
+        }
+
+        /* Confirmation Message */
+        #confirmationMessage {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>✈️ Wanderlust</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Destinations</a>
+            <a href="#">Reservations</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h2>Explore the World</h2>
+        <p>Book your dream travel package today</p>
+    </section>
+
+    <!-- Main Booking Form Section -->
+    <main class="container">
+        <h2 class="form-title">Make Your Reservation</h2>
+        
+        <form id="reservationForm">
+            <div class="form-grid">
+                <!-- Full Name -->
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" placeholder="John Doe" required>
+                </div>
+
+                <!-- Email Address -->
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="john@example.com" required>
+                </div>
+
+                <!-- Phone Number -->
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" placeholder="+1 234 567 890" required>
+                </div>
+
+                <!-- Destination -->
+                <div class="form-group">
+                    <label for="destination">Destination</label>
+                    <select id="destination" required>
+                        <option value="" disabled selected>Select a destination</option>
+                        <option value="Paris, France">Paris, France</option>
+                        <option value="Bali, Indonesia">Bali, Indonesia</option>
+                        <option value="Tokyo, Japan">Tokyo, Japan</option>
+                        <option value="Rome, Italy">Rome, Italy</option>
+                        <option value="New York, USA">New York, USA</option>
+                    </select>
+                </div>
+
+                <!-- Departure Date -->
+                <div class="form-group">
+                    <label for="departureDate">Departure Date</label>
+                    <input type="date" id="departureDate" required>
+                </div>
+
+                <!-- Return Date -->
+                <div class="form-group">
+                    <label for="returnDate">Return Date</label>
+                    <input type="date" id="returnDate" required>
+                </div>
+
+                <!-- Number of Guests -->
+                <div class="form-group">
+                    <label for="guests">Number of Travelers</label>
+                    <input type="number" id="guests" min="1" max="10" value="1" required>
+                </div>
+
+                <!-- Special Requests -->
+                <div class="form-group full-width">
+                    <label for="requests">Special Requests / Notes</label>
+                    <textarea id="requests" rows="4" placeholder="Dietary requirements, airport pickup, accessibility needs..."></textarea>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit">Confirm Booking</button>
+        </form>
+
+        <!-- Message shown after submission -->
+        <div id="confirmationMessage"></div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Wanderlust Travel Agency. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for Handling Reservations -->
+    <script>
+        document.getElementById('reservationForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent page refresh
+
+            // Capture inputs
+            const name = document.getElementById('fullName').value;
+            const destination = document.getElementById('destination').value;
+            const departure = document.getElementById('departureDate').value;
+            const guests = document.getElementById('guests').value;
+
+            // Show confirmation message
+            const messageDiv = document.getElementById('confirmationMessage');
+            messageDiv.innerHTML = `
+                <h3>Thank you, ${name}!</h3>
+                <p>Your trip to <strong>${destination}</strong> for <strong>${guests} traveler(s)</strong> starting on <strong>${departure}</strong> has been requested.</p>
+                <p>A confirmation email has been sent to your inbox.</p>
+            `;
+            messageDiv.style.display = 'block';
+
+            // Reset form fields
+            this.reset();
+        });
+    </script>
+</body>
+</html>
